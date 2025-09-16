@@ -31,6 +31,6 @@ class RegisterController extends Controller
             'role'     => 'user', // default role saat register
         ]);
 
-        return redirect('/login')->with('success', 'Pendaftaran berhasil, silakan login.');
+        return back()->with('registration_success', 'Pendaftaran berhasil, silakan login.');
     }
 }

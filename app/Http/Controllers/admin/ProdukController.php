@@ -36,6 +36,7 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'nama' => 'required|string|max:255',
             'harga' => 'required|numeric',
+            'stok' => 'required|integer|min:0',
             'deskripsi' => 'nullable|string',
             'foto' => 'nullable|image|max:2048'
         ]);
@@ -61,6 +62,7 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'nama' => 'required|string|max:255',
             'harga' => 'required|numeric',
+            'stok' => 'required|integer|min:0',
             'deskripsi' => 'nullable|string',
             'foto' => 'nullable|image|max:2048'
         ]);
@@ -80,6 +82,11 @@ class ProdukController extends Controller
 
     public function destroy(Produk $produk)
     {
+        // Cek stok sebelum menghapus
+        if ($produk->stok > 0) {
+            return redirect()->back()->with('error', 'Tidak dapat menghapus produk karena masih memiliki stok.');
+        }
+
         if ($produk->foto && Storage::disk('public')->exists($produk->foto)) {
             Storage::disk('public')->delete($produk->foto);
         }

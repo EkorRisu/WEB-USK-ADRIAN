@@ -18,27 +18,27 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-<body class="bg-pink-50 font-sans antialiased">
+<body class="bg-[#1e1e28d9] font-sans antialiased">
     <div id="app">
         <!-- Navbar -->
-        <nav class="bg-pink-600 fixed top-0 left-0 w-full z-50 shadow">
+        <nav class="bg-black fixed w-full z-50 shadow">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16 items-center">
                     <div class="flex-shrink-0">
                         <a href="{{ url('/user/dashboard') }}" class="text-white font-bold text-lg">
-                        ADR BOOKS ( {{ Auth::user()->name }} )
+                        AzurBook Store ( {{ Auth::user()->name }} )
                         </a>
                     </div>
 
                     <div class="flex items-center space-x-6">
-                        <a href="https://myportfolioadrian.vercel.app" class="text-white hover:text-pink-100 font-medium">
+                        <a href="https://myportfolioadrian.vercel.app"class="flex items-center px-4 py-2 bg-black text-white border-2 border-white font-semibold rounded-lg hover:bg-blue-600 hover:border-blue-600 transform hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
                             About Us
                         </a>
 
                         <!-- Tombol Logout -->
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            class="text-white hover:text-pink-100 font-medium">
+                            class="flex items-center px-4 py-2 bg-black text-white border-2 border-white font-semibold rounded-lg hover:bg-red-600 hover:border-red-600 transform hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
                             Logout
                         </a>
                     </div>

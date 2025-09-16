@@ -16,8 +16,17 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'role' => 'admin', // Make sure you have this column in users table
+            'password' => bcrypt('password'), // Set a default password
+        ]);
+
+        User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'role' => 'user',
+            'password' => bcrypt('12345678'), // Set a default password
         ]);
     }
 }

@@ -110,6 +110,30 @@
                         <div class="field-hint">Set the selling price for this product</div>
                     </div>
 
+                    <!-- Stock Field -->
+                    <div class="form-group">
+                        <label for="stok" class="form-label">
+                            <span class="label-icon">📦</span>
+                            Stock
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" name="stok" id="stok"
+                                class="form-input @error('stok') error @enderror"
+                                value="{{ old('stok', 0) }}"
+                                placeholder="Enter stock quantity"
+                                min="0"
+                                required>
+                            <div class="input-icon">🔢</div>
+                        </div>
+                        @error('stok')
+                            <div class="error-message">
+                                <span class="error-icon">⚠️</span>
+                                {{ $message }}
+                            </div>
+                        @enderror
+                        <div class="field-hint">Enter the available quantity of this product</div>
+                    </div>
+
                     <!-- Image Upload Field -->
                     <div class="form-group">
                         <label for="foto" class="form-label">
@@ -339,16 +363,16 @@
     @endpush
 
     <style>
-        .form-container {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 2rem;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
+            .form-container {
+        background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+        min-height: 100vh;
+        padding: 2rem;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
         /* Header Section */
         .form-header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(71, 71, 71, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 2rem;
@@ -365,7 +389,7 @@
         .page-title {
             font-size: 2.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background:white;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 0;
@@ -379,7 +403,7 @@
         }
 
         .page-subtitle {
-            color: #64748b;
+            color: #c7c7c8;
             font-size: 1.1rem;
             margin: 0.5rem 0 0 0;
         }
@@ -416,12 +440,37 @@
             margin: 0 auto;
         }
 
-        .form-card {
+                .form-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 2rem;
+            padding: 1.5rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            min-height: calc(100vh - 200px);
+            overflow-y: visible;
+            padding-bottom: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Styling untuk scrollbar pada Chrome/Safari */
+        .form-card::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .form-card::-webkit-scrollbar-track {
+            background: #e5e7eb;
+            border-radius: 4px;
+        }
+
+        .form-card::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+
+        .form-card::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
         }
 
         .form-progress {

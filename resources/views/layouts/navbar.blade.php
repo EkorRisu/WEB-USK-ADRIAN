@@ -19,17 +19,46 @@
 
     <!-- Vite (if applicable) -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        .hover-slide {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .hover-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+        
+        .hover-slide:hover::before {
+            transform: translateX(0);
+        }
+        
+        .hover-slide:hover {
+            color: white;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100 min-h-screen font-sans antialiased">
     <div id="app">
         <!-- Navbar -->
-<nav class="bg-pink-600 fixed top-0 left-0 w-full z-50 shadow">
+<nav class="bg-black fixed top-0 left-0 w-full z-50 shadow">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <!-- Logo -->
             <a href="/" class="text-white font-bold text-lg">
-                ADR BOOKS STORE
+                Azur BookStore  
             </a>
 
             <!-- Menu kanan -->
@@ -42,29 +71,29 @@
 
                         @if ($role === 'admin')
                             <a href="{{ route('admin.dashboard') }}"
-                                class="bg-pink-500 hover:bg-pink-700 text-white text-sm px-4 py-2 rounded transition">
+                                class="bg-gray-600 hover:bg-gray-800 text-white text-sm px-4 py-2 rounded transition">
                                 Dashboard Admin
                             </a>
                         @elseif ($role === 'user')
                             <a href="{{ route('user.dashboard') }}"
-                                class="bg-pink-500 hover:bg-pink-700 text-white text-sm px-4 py-2 rounded transition">
+                                class="bg-gray-600 hover:bg-gray-800 text-white text-sm px-4 py-2 rounded transition">
                                 Dashboard User
                             </a>
                         @else
                             <a href="{{ url('/dashboard') }}"
-                                class="bg-pink-500 hover:bg-pink-700 text-white text-sm px-4 py-2 rounded transition">
+                                class="bg-gray-600 hover:bg-gray-800 text-white text-sm px-4 py-2 rounded transition">
                                 Dashboard
                             </a>
                         @endif
                     @else
                         <button id="loginButton"
-                            class="bg-pink-200 text-pink-600 hover:border hover:border-pink-500 text-sm px-4 py-2 rounded transition">
+                            class="border border-white text-white hover:border-white hover:bg-white hover:text-black text-sm px-4 py-2 rounded transition">
                             Log in
                         </button>
 
                         @if (Route::has('register'))
                             <button id="registerButton"
-                                class="border border-pink-200 text-white hover:border-pink-300 hover:bg-pink-500 hover:text-white text-sm px-4 py-2 rounded transition">
+                            class="border border-white text-white hover:border-white hover:bg-white hover:text-black text-sm px-4 py-2 rounded transition">
                                 Register
                             </button>
                         @endif
@@ -96,6 +125,10 @@
                     @if(session('status'))
                         <div class="bg-green-100 text-green-800 p-2 rounded mb-3">{{ session('status') }}</div>
                     @endif
+                    
+                    @if(session('registration_success'))
+                        <div class="bg-green-100 text-green-800 p-2 rounded mb-3">{{ session('registration_success') }}</div>
+                    @endif
             
                     @if(session('error'))
                         <div class="bg-red-100 text-red-800 p-2 rounded mb-3">{{ session('error') }}</div>
@@ -126,7 +159,7 @@
                         </div>
             
                         <button type="submit"
-                            class="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded">
+                            class="w-full  bg-black hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded">
                             Login
                         </button>
                     </form>
@@ -182,7 +215,7 @@
                         </div>
             
                         <button type="submit"
-                            class="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded">
+                            class="w-full  bg-black hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded">
                             Daftar
                         </button>
                     </form>
@@ -221,6 +254,12 @@
             @else
                 loginModal?.classList.remove('hidden');
             @endif
+        @endif
+
+        // Show login modal after successful registration
+        @if(session('registration_success'))
+            registerModal?.classList.add('hidden');
+            loginModal?.classList.remove('hidden');
         @endif
 
         @if(session('error'))

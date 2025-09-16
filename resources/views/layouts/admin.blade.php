@@ -21,7 +21,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-100 min-h-screen font-sans antialiased">
+<body class="min-h-screen bg-[url(https://c0.wallpaperflare.com/preview/469/70/385/background-book-bookcase-books.jpg)] bg-cover bg-center bg-fixed bg-no-repeat backdrop-blur-md">
     <div id="app">
         <!-- Navbar -->
         <!-- Navbar -->
@@ -29,15 +29,16 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16 items-center">
                     <a href="{{ url('/admin/dashboard') }}" class="text-white font-bold text-lg">
-                       ADR BOOKS ( {{ Auth::user()->name }} )
+                       AzurBook Store ( {{ Auth::user()->name }} )
                     </a>
         
                     <!-- Logout Button -->
-                    <a href="{{ route('logout') }}"
+                    <button
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                        class="text-white font-semibold hover:text-gray-300">
+                        class="flex items-center px-4 py-2 bg-black text-white border-2 border-white font-semibold rounded-lg hover:bg-red-600 hover:border-red-600 transform hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                    >
                         Logout
-                    </a>
+                    </button>
                 </div>
             </div>
         </nav>
@@ -54,7 +55,7 @@
         </form>
 
         <!-- Page Content -->
-        <main class="pt-14">
+        <main class="pt-16 min-h-screen">
             @yield('content')
         </main>
     </div>

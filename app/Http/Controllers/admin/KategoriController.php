@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class KategoriController extends Controller
 {
- 
+
     public function index()
     {
         $kategoris = Kategori::all();
@@ -58,9 +58,17 @@ class KategoriController extends Controller
         return redirect()->route('admin.kategori.index');
     }
 
-    public function destroy(Kategori $kategori)
+    public function destroy($id)
     {
+        $kategori = Kategori::findOrFail($id);
+
+        // cek apakah kategori ini masih punya produk
+        if ($kategori->produk()->count() > 0) {
+            return redirect()->back()->with('error', 'Kategori tidak bisa dihapus karena masih ada produk.');
+        }
+
         $kategori->delete();
-        return back();
+
+        return redirect()->back()->with('success', 'Kategori berhasil dihapus.');
     }
 }
